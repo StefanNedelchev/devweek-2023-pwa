@@ -1,6 +1,6 @@
 # PWA DevWeek Example
 
-Welcome to my repo which aims to provide you the basics for creating a valid Progressive Web App (PWA) with implemented push notifications using the [Web Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API), background sync using the [Background Sync API](https://developer.mozilla.org/en-US/docs/Web/API/Background_Synchronization_API), [share target handling](https://developer.mozilla.org/en-US/docs/Web/Manifest/share_target), and [file handling](https://developer.mozilla.org/en-US/docs/Web/Manifest/file_handlers).
+Welcome to my repo which aims to provide you the basics for creating a valid Progressive Web App (PWA) with implemented push notifications using the [Web Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API), background sync using the [Background Sync API](https://developer.mozilla.org/en-US/docs/Web/API/Background_Synchronization_API), [launch shortcuts](https://developer.mozilla.org/en-US/docs/Web/Manifest/shortcuts), [share target handling](https://developer.mozilla.org/en-US/docs/Web/Manifest/share_target), and [file handling](https://developer.mozilla.org/en-US/docs/Web/Manifest/file_handlers).
 
 ## Project structure
 
@@ -66,6 +66,18 @@ To subscribe for push notifications you have to click on the button and give not
 ### Pushing a notification
 
 To push a notification you need to send a POST request to the **/send-message** end point of our API. You can use the `test-push.http` script from the root directory which serves as an example. You can use it with a REST client like Postman or [the REST Client extension for VSCode](https://marketplace.visualstudio.com/items?itemName=humao.rest-client). You can modify the port and the body of the request to suite your needs. After sending a request all subscribers should receive a push notification. The service worker also handles clicking on the notification and you'll see small label appear on the UI.
+
+### Requesting a background sync
+
+To test the background sync event simply click the "Sync Test" button. If you have online connection the event will instantly be dispatched and you'll see the label below the button indicating a successful completion. If you try simulating offline mode before clicking the button you will observe how the sync event was requested but it stays on hold until you are back online.
+
+### Handling files
+
+The web manifest file defines two separate file handlers - one associates the app with a few image types and another associates the app with a few audio types. After you install the app as a PWA, it will be available as an option in the "Open with" dialog of your OS for the registered file types. Try opening images or audio files with the app and see how the app initializes an image or an audio element based on the file type.
+
+### Handling shared data
+
+The web manifest file defines a share target handler that describes a GET request of the path of the app. After you install the app as a PWA, it will be available as a share target. You can try to initiate the share dialog of your OS via other applications and see that the app is available as a target for sharing. After a successful share, the app will launch and pick the shared data and display it.
 
 ## Further reading
 
