@@ -1,0 +1,28 @@
+{
+  "name": "pwa-push-example",
+  "version": "1.0.0",
+  "description": "A minimal example of a PWA with implemented push notifications",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node api/app.js",
+    "vapid-keys": "web-push generate-vapid-keys"
+  },
+  "author": "Stefan Nedelchev",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "web-push": "^3.6.6"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^18.18.11",
+    "@types/web-push": "^3.6.3"
+  }
+}

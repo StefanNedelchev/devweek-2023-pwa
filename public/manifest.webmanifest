@@ -1,0 +1,130 @@
+{
+  "name": "PWA Example",
+  "short_name": "PWA Example",
+  "theme_color": "#de411b",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
+  ],
+  "scope": "/",
+  "start_url": "/",
+  "file_handlers": [
+    {
+      "action": "/",
+      "accept": {
+        "audio/wav": [".wav"],
+        "audio/aiff": [".aiff"],
+        "audio/mpeg": [".mp3"],
+        "audio/flac": [".flac"],
+        "audio/m4a": [".m4a"],
+        "audio/webm": [".webm"]
+      }
+    },
+    {
+      "action": "/",
+      "accept": {
+        "image/jpeg": [".jpg", ".jpeg"],
+        "image/png": [".png"],
+        "image/gif": [".gif"],
+        "image/svg+xml": [".svg"],
+        "image/webp": [".webp"]
+      }
+    }
+  ],
+  "launch_handler": {
+    "client_mode": ["navigate-existing", "auto"]
+  },
+  "share_target": {
+    "action": "/",
+    "method": "GET",
+    "params": {
+      "title": "shareTitle",
+      "text": "shareText",
+      "url": "shareLink"
+    }
+  },
+  "icons": [
+    {
+      "src": "assets/icons/icon-monochrome-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "monochrome"
+    },
+    {
+      "src": "assets/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-maskable-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-maskable-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots" : [
+    {
+      "src": "assets/screenshots/screen1_landscape.png",
+      "sizes": "1480x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Homescreen of PWA Example App"
+    },
+    {
+      "src": "assets/screenshots/screen1_portrait.png",
+      "sizes": "720x1480",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Homescreen of PWA Example App"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Super Mario",
+      "short_name": "Mario",
+      "url": "/?character=Mario",
+      "icons": [{
+        "src": "assets/shortcut-icons/icons8-super-mario-96.png",
+        "sizes": "96x96",
+        "type": "image/png"
+      }]
+    },
+    {
+      "name": "Luigi",
+      "url": "/?character=Luigi",
+      "icons": [{
+        "src": "assets/shortcut-icons/icons8-luigi-96.png",
+        "sizes": "96x96",
+        "type": "image/png"
+      }]
+    }
+  ]
+}
