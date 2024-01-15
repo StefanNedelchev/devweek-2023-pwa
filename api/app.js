@@ -21,7 +21,7 @@ app.post('/subscribe', (req, res) => {
     .then(() => res.status(200).send({ message: '✔️ Subscription saved' }))
     .catch((err) => {
       console.log(err);
-      res.status(422).send({ message: `Subscription not saved. ${err.message}` });
+      res.status(422).send({ message: `❌ Subscription not saved. ${err.message}` });
     });
 });
 
@@ -33,12 +33,14 @@ app.post('/send-message', (req, res) => {
           if (err.statusCode === 404 || err.statusCode === 410) {
             console.log('Subscription has expired or is no longer valid: ', err.message);
             deleteSubscription(sub.endpoint);
+          } else {
+            console.error(err);
           }
         })
       )));
       res.status(200).send();
     })
-    .catch((err) => res.status(422).send({ message: `Subscription not saved. ${err.message}` }))
+    .catch((err) => res.status(422).send({ message: `❌ subscription not found. ${err.message}` }))
 });
 
 // Serve static files for the web app
