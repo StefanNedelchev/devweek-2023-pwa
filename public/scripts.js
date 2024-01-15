@@ -47,38 +47,33 @@ function initializeServiceWorker() {
     return;
   }
 
-  if ('serviceWorker' in window.navigator) {
-    swInfoEl.className = 'alert info';
-    swInfoEl.textContent = 'Registering service worker...';
+  swInfoEl.className = 'alert info';
+  swInfoEl.textContent = 'Registering service worker...';
 
-    // Check if the notifications are denied by the user and update the UI
-    if (window.Notification.permission === 'denied') {
-      subInfoEl.textContent = '❌ Notifications have been disabled!';
-    }
-
-    window.navigator.serviceWorker.register('sw.js').then(() => {
-      swInfoEl.className = 'alert success';
-      swInfoEl.textContent = 'Service Worker has been registered successfully 🙂';
-
-      navigator.serviceWorker.addEventListener('message', (event) => {
-        switch (event.data.message) {
-          case 'notification-clicked':
-            // listen for notification click messages from the service worker and update the UI
-            subInfoEl.textContent = '🖱️ The notification was clicked! 🖱️';
-            clearBadge();
-            setTimeout(() => { subInfoEl.textContent = ''; }, 5000);
-            break;
-          case 'message-sync':
-            // Listen for messages from background sync and update the UI
-            syncinfoEl.textContent = '✔️ Messages have been synced!';
-            setTimeout(() => { syncinfoEl.textContent = '' }, 5000);
-            break;
-        }
-      });
-    });
-  } else {
-
+  // Check if the notifications are denied by the user and update the UI
+  if (window.Notification.permission === 'denied') {
+    subInfoEl.textContent = '❌ Notifications have been disabled!';
   }
+
+  window.navigator.serviceWorker.register('sw.js').then(() => {
+    swInfoEl.className = 'alert success';
+    swInfoEl.textContent = 'Service Worker has been registered successfully 🙂';
+
+    navigator.serviceWorker.addEventListener('message', (event) => {
+      switch (event.data.message) {
+        case 'notification-clicked':
+          // listen for notification click messages from the service worker and update the UI
+          subInfoEl.textContent = '🖱️ The notification was clicked! 🖱️';
+          setTimeout(() => { subInfoEl.textContent = ''; }, 5000);
+          break;
+        case 'message-sync':
+          // Listen for messages from background sync and update the UI
+          syncinfoEl.textContent = '✔️ Messages have been synced!';
+          setTimeout(() => { syncinfoEl.textContent = '' }, 5000);
+          break;
+      }
+    });
+  });
 }
 
 async function requestPermission() {
