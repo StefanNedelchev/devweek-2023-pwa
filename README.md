@@ -25,14 +25,14 @@ The front-end is a simple web page and it's located in the `/public` directory. 
 - `styles.css` - stylesheet wieh a few styles for our elements
 - `scripts.js` - the client-side JavaScript code which is used by the web page
 - `sw.js` - the [service worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) which will be registered an installed by the browser. It's necessary for PWA applications and its main purpose for this project is to handle push notifications and background sync events.
-- `manifes.webmanifes` - basic web manifest file which is necessary for each PWA.
+- `manifes.webmanifest` - basic web manifest file which is necessary for each PWA.
 - `/assets` - a folder that includes all static assets (in this case we have icons and a splash screen for iOS)
 
 ## Installation and usage
 
 ### Project setup
 
-1. First you need to have Node JS installed on your system (v18 or higher). If you don't have any just visit [the official website](https://nodejs.org/en) and download the LTS version. During installation make sure you select the option to install the `NPM` package manager too.
+1. First you need to have Node JS installed on your system (v22 or higher). If you don't have any just visit [the official website](https://nodejs.org/en) and download the LTS version. During installation make sure you select the option to install the `NPM` package manager too.
 
 2. Open the project directory with your IDE or the command-line and run `npm install` to install all the packages needed by the Node server.
 

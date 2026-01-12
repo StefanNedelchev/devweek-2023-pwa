@@ -82,7 +82,7 @@ async function requestPermission() {
   }
 
   return window.Notification.permission === 'default'
-    ? window.Notification.requestPermission()
+    ? await window.Notification.requestPermission()
     : window.Notification.permission;
 }
 
@@ -100,7 +100,7 @@ async function subscribeToNotifications() {
 
   const response = await fetch(`http://localhost:${apiPort}/subscribe`, {
     method: 'POST',
-    body: JSON.stringify(pushSubscription),
+    body: JSON.stringify(pushSubscription.toJSON()),
     headers: {
       'content-type': 'application/json',
     },
@@ -165,28 +165,32 @@ function handleSharedData() {
 }
 
 function handleInputFiles() {
-  if ('launchQueue' in window) {
-    window.launchQueue.setConsumer((launchParams) => {
-      if (launchParams?.files.length) {
-        const fileHandle = launchParams.files[0];
-        fileHandle.getFile().then((file) => {
-          const fileUrl = URL.createObjectURL(file);
-
-          if (file.type.startsWith('audio/')) {
-            const audioEl = document.createElement('audio');
-            audioEl.src = fileUrl;
-            audioEl.autoplay = false;
-            audioEl.controls = true;
-            document.querySelector('.container').appendChild(audioEl);
-            audioEl.play();
-          } else if (file.type.startsWith('image/')) {
-            const imgEl = document.createElement('img');
-            imgEl.src = fileUrl;
-            imgEl.className = 'test-img';
-            document.querySelector('.container').appendChild(imgEl);
-          }
-        });
-      }
-    })
+  if (!('launchQueue' in window)) {
+    return;
   }
+
+  window.launchQueue.setConsumer((launchParams) => {
+    if (!launchParams?.files.length) {
+      return;
+    }
+
+    const fileHandle = launchParams.files[0];
+    fileHandle.getFile().then((file) => {
+      const fileUrl = URL.createObjectURL(file);
+
+      if (file.type.startsWith('audio/')) {
+        const audioEl = document.createElement('audio');
+        audioEl.src = fileUrl;
+        audioEl.autoplay = false;
+        audioEl.controls = true;
+        document.querySelector('.container').appendChild(audioEl);
+        audioEl.play();
+      } else if (file.type.startsWith('image/')) {
+        const imgEl = document.createElement('img');
+        imgEl.src = fileUrl;
+        imgEl.className = 'test-img';
+        document.querySelector('.container').appendChild(imgEl);
+      }
+    });
+  })
 }
