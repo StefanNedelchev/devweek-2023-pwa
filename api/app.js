@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 
 app.post('/subscribe', (req, res) => {
   insertSubscription(req.body)
-    .then(() => res.status(200).send({ message: '✔️ Subscription saved' }))
+    .then(() => res.status(200).send({ message: '✅ Subscription saved' }))
     .catch((err) => {
       console.log(err);
       res.status(422).send({ message: `❌ Subscription not saved. ${err.message}` });
@@ -31,7 +31,7 @@ app.post('/send-message', (req, res) => {
       Promise.all(subs.map((sub) => (
         sendNotification(sub, req.body.title, req.body.message).catch((err) => {
           if (err.statusCode === 404 || err.statusCode === 410) {
-            console.log('Subscription has expired or is no longer valid: ', err.message);
+            console.log('⚠️ Subscription has expired or is no longer valid:', err.message);
             deleteSubscription(sub.endpoint);
           } else {
             console.error(err);
